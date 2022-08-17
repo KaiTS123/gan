@@ -43,7 +43,7 @@ class NeuralNetwork:
             z.append(z_)
             a_ = np.concatenate((np.ones((m, 1)), sigmoid(z_)), 1)
         a.append(sigmoid(z_))
-        delta = [np.transpose(a[-1] -y)]
+        delta = [np.transpose(a[-1] - y)]
         for theta in reversed(self.weights[1:]):
             z.pop()
             delta.insert(0, np.multiply(np.matmul(np.transpose(theta), delta[0])[1:],
@@ -65,6 +65,7 @@ class NeuralNetwork:
             gradients = self.gradient(X, y)
             for i in range(len(self.weights)):
                 self.weights[i] -= gradients[i] * learning_rate
+
 
     def accuracy(self, X, y):
         pred = self.feedforward(X)
